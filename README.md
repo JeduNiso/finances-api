@@ -1,53 +1,144 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 💰 Finances — Family Finance Manager
 
 <p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
+  <img src="https://img.shields.io/badge/Laravel-13-FF2D20?style=for-the-badge&logo=laravel&logoColor=white" />
+  <img src="https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black" />
+  <img src="https://img.shields.io/badge/React_Native-Expo-000020?style=for-the-badge&logo=expo&logoColor=white" />
+  <img src="https://img.shields.io/badge/MySQL-8-4479A1?style=for-the-badge&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Deployed-Railway-0B0D0E?style=for-the-badge&logo=railway&logoColor=white" />
 </p>
 
-## About Laravel
+> A full-stack family finance management system with a REST API backend, React web app, and React Native mobile app. Track shared expenses, fixed costs, debts, and bank accounts across your entire family group.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## ✨ Features
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- 👨‍👩‍👧 **Family groups** — invite members, assign roles (owner / admin / member)
+- 🏦 **Multi-account** — manage multiple bank accounts per family
+- 💸 **Spending tracker** — log daily expenses by category with balance auto-deduction
+- 📅 **Fixed expenses** — recurring monthly bills with payment calendar
+- 💳 **Debt manager** — track debts with payment history and progress percentage
+- 📊 **Dashboard** — balance overview, spending by category, top expenses, member breakdown
+- 🔐 **Auth** — token-based authentication via Laravel Sanctum
 
-## Learning Laravel
+---
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+## 🗂 Project Structure
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
-```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+```
+finances/
+├── app/                  # Laravel backend (API)
+│   ├── Http/Controllers/Api/
+│   ├── Http/Requests/
+│   ├── Http/Resources/
+│   └── Models/
+├── database/migrations/  # 13 MySQL tables
+├── resources/js/         # React 19 SPA
+│   ├── pages/
+│   ├── components/
+│   ├── stores/           # Zustand state management
+│   ├── api/              # Axios API layer
+│   └── router/
+└── src/                  # React Native (Expo) mobile app
+    ├── screens/
+    ├── navigation/
+    ├── stores/
+    ├── api/
+    └── constants/
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 🛠 Tech Stack
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+| Layer | Technology |
+|---|---|
+| Backend | Laravel 13, PHP 8.4, Laravel Sanctum |
+| Database | MySQL 8 |
+| Web Frontend | React 19, Vite, Tailwind CSS v4, Zustand, Recharts |
+| Mobile | React Native, Expo SDK 52, React Navigation v7 |
+| Deployment | Railway (API + DB), Vercel (Web) |
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 🚀 Local Setup
+
+### Prerequisites
+- PHP 8.4, Composer
+- Node.js 22+
+- MySQL 8
+
+### Backend
+
+```bash
+git clone https://github.com/JeduNiso/finances-api.git
+cd finances
+
+cp .env.example .env
+# Fill in DB_* and APP_KEY in .env
+
+composer install
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
+
+### Web Frontend
+
+```bash
+npm install
+npm run dev
+```
+
+> Set `VITE_API_URL=http://localhost:8000/api` in `.env`
+
+### Mobile (Expo)
+
+```bash
+cd src
+npx expo start
+```
+
+> Set `apiUrl` in `app.config.js` extra → `http://YOUR_LOCAL_IP:8000/api`
+
+---
+
+## 🌐 API Endpoints
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/register` | Register + create family |
+| POST | `/api/auth/login` | Login, returns token |
+| GET | `/api/dashboard` | Full dashboard summary |
+| GET/POST | `/api/spending` | List / create spending |
+| GET/POST | `/api/expenses` | Fixed expenses |
+| POST | `/api/expenses/{id}/pay` | Pay a fixed expense |
+| GET/POST | `/api/debts` | Debts list / create |
+| POST | `/api/debts/{id}/payment` | Register debt payment |
+| GET/POST | `/api/accounts` | Bank accounts |
+| GET/POST | `/api/families/invite` | Invite family member |
+
+All protected routes require `Authorization: Bearer {token}`.
+
+---
+
+## 📦 Deployment
+
+### Backend → Railway
+- Auto-detected via `nixpacks.toml` (PHP 8.4 + Composer + Node)
+- MySQL plugin linked via Railway env vars
+- Migrations run automatically on deploy (`php artisan migrate --force`)
+
+### Frontend → Vercel
+- Connect GitHub repo, set `VITE_API_URL` env var
+- Auto-builds on every push with `npm run build`
+
+---
+
+## 📄 License
+
+MIT © [JeduNiso](https://github.com/JeduNiso)
 
 ## Security Vulnerabilities
 

@@ -3,6 +3,7 @@ FROM php:8.4-cli-alpine
 # System deps
 RUN apk add --no-cache \
     git unzip curl bash \
+    ca-certificates \
     libpng-dev freetype-dev libjpeg-turbo-dev \
     icu-dev oniguruma-dev \
     nodejs npm

@@ -1,12 +1,13 @@
-FROM php:8.4-cli-alpine
+FROM php:8.4-cli-bookworm
 
 # System deps
-RUN apk add --no-cache \
-    git unzip curl bash \
-    ca-certificates \
-    libpng-dev freetype-dev libjpeg-turbo-dev \
-    icu-dev oniguruma-dev \
-    nodejs npm
+RUN apt-get update && apt-get install -y \
+    git unzip curl ca-certificates gnupg \
+    libpng-dev libfreetype6-dev libjpeg62-turbo-dev \
+    libicu-dev libonig-dev \
+    && curl -fsSL https://deb.nodesource.com/setup_22.x | bash - \
+    && apt-get install -y nodejs \
+    && rm -rf /var/lib/apt/lists/*
 
 # PHP extensions
 RUN docker-php-ext-install pdo pdo_mysql bcmath mbstring intl
